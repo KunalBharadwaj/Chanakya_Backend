@@ -135,10 +135,10 @@ router.post("/chat", async (req, res) => {
         const hotels: any[] = [];
 
         // Check for alarms
-        const alarmMatch = llmResponse.match(/\\[COMMAND: REMINDER \\| message: (.*?) \\| seconds: (\\d+)\\]/);
+        const alarmMatch = llmResponse.match(/\[COMMAND: REMINDER \| message: (.*?) \| seconds: (\d+)\]/);
         if (alarmMatch) {
             alarms.push({ message: alarmMatch[1], seconds: parseInt(alarmMatch[2] as string) });
-            llmResponse = llmResponse.replace(/\\[COMMAND: REMINDER .*?\\]/g, "").trim();
+            llmResponse = llmResponse.replace(/\[COMMAND: REMINDER .*?\]/g, "").trim();
         }
 
         // Check for hotels if asked
